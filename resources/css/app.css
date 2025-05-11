@@ -1,0 +1,232 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+     
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+@custom-variant dark (&:where(.dark, .dark *));
+@theme {
+    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    /* Colores personalizados basados en la imagen */
+    --color-navy: #1a2346; /* Azul marino oscuro del fondo principal */
+    --color-gold: #f5b729; /* Dorado/amarillo para acentos */
+    --color-light-gold: #ffd868; /* Tono más claro del dorado */
+    --color-dark-gold: #d49600; /* Versión más oscura del dorado */
+    --color-white: #ffffff;
+    --color-off-white: #f8f9fa;
+    
+    /* Zinc colors (mantenidos para compatibilidad) */
+    --color-zinc-50: #fafafa;
+    --color-zinc-100: #f5f5f5;
+    --color-zinc-200: #e5e5e5;
+    --color-zinc-300: #d4d4d4;
+    --color-zinc-400: #a3a3a3;
+    --color-zinc-500: #737373;
+    --color-zinc-600: #525252;
+    --color-zinc-700: #404040;
+    --color-zinc-800: #262626;
+    --color-zinc-900: #171717;
+    --color-zinc-950: #0a0a0a;
+    
+    /* Colores de acento actualizados */
+    --color-accent: var(--color-gold);
+    --color-accent-content: var(--color-navy);
+    --color-accent-foreground: var(--color-white);
+}
+@layer theme {
+    .dark {
+        --color-accent: var(--color-gold);
+        --color-accent-content: var(--color-navy);
+        --color-accent-foreground: var(--color-white);
+    }
+    body {
+        background-color: var(--color-white);
+    }
+    body.bg-gradient-to-br.from-blue-50.to-purple-50 {
+        background-image: linear-gradient(to bottom right, var(--color-off-white), #f8f8ff);
+    }
+    .bg-gradient-to-br.from-blue-600.to-purple-600 {
+        background-image: linear-gradient(to bottom right, var(--color-navy), #2a305c);
+    }
+}
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+    body {
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.5;
+        color: var(--color-zinc-800);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+    }
+}
+@layer components {
+    .navbar {
+        @apply bg-white shadow-sm py-3 px-6;
+    }
+    .navbar-brand {
+        @apply text-xl font-bold text-navy;
+        color: var(--color-navy);
+    }
+    .nav-link {
+        @apply text-sm font-medium text-zinc-700 hover:text-gold transition-colors;
+        color: var(--color-navy);
+    }
+    .nav-link:hover {
+        color: var(--color-gold);
+    }
+    .hero-section {
+        @apply bg-navy text-white py-20 px-6;
+        background-color: var(--color-navy);
+    }
+    .hero-title {
+        @apply text-4xl md:text-5xl font-bold mb-4;
+    }
+    .hero-subtitle {
+        @apply text-xl opacity-90 mb-8;
+    }
+    
+    /* Form elements */
+    .form-input {
+        @apply w-full py-3 px-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 transition-shadow duration-200;
+        box-shadow: 0 0 0 0 rgba(245, 183, 41, 0);
+    }
+    .form-input:focus {
+        box-shadow: 0 0 0 3px rgba(245, 183, 41, 0.25);
+        border-color: var(--color-gold);
+    }
+    .toggle-password {
+        @apply text-gray-400 hover:text-gold transition-colors;
+    }
+    .toggle-password:hover {
+        color: var(--color-gold);
+    }
+    
+    /* Buttons */
+    .btn-primary {
+        @apply w-full py-3 px-4 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300;
+        background-color: var(--color-gold);
+        color: var(--color-navy);
+    }
+    .btn-primary:hover {
+        background-color: var(--color-dark-gold);
+    }
+    .btn-secondary {
+        @apply w-full py-3 px-4 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300;
+        background-color: var(--color-navy);
+        color: var(--color-white);
+    }
+    .btn-secondary:hover {
+        background-color: #141b36; /* Versión más oscura del navy */
+    }
+    .social-btn {
+        @apply flex items-center justify-center py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all;
+    }
+    
+    /* Dividers and other elements */
+    .divider {
+        @apply flex items-center my-6;
+    }
+    .divider::before,
+    .divider::after {
+        content: '';
+        flex-grow: 1;
+        height: 1px;
+        background-color: #d1d5db;
+    }
+    .divider span {
+        @apply mx-4 text-gray-500;
+    }
+    
+    /* Card elements */
+    .card {
+        @apply bg-white rounded-lg shadow-md overflow-hidden;
+    }
+    .card-header {
+        @apply px-6 py-4 bg-navy text-white font-medium;
+        background-color: var(--color-navy);
+    }
+    .card-body {
+        @apply p-6;
+    }
+    
+    /* Tags/badges */
+    .badge {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+    }
+    .badge-primary {
+        background-color: var(--color-gold);
+        color: var(--color-navy);
+    }
+    .badge-secondary {
+        background-color: var(--color-navy);
+        color: var(--color-white);
+    }
+}
+
+/* Animaciones */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Estilos específicos para la página de comunidades NARP */
+.narp-header {
+    background-color: var(--color-navy);
+    color: var(--color-white);
+    padding: 3rem 0;
+}
+.narp-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+.narp-title span {
+    color: var(--color-gold);
+}
+.explore-btn {
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+.explore-btn:hover {
+    background-color: var(--color-dark-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.publications-btn {
+    background-color: transparent;
+    color: var(--color-white);
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+.publications-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-white);
+}
+.community-card {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.community-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
